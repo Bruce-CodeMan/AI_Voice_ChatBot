@@ -1,7 +1,11 @@
+import Controller from "./components/Controller"
+
 function App() {
 
   return (
-    <p className="text-3xl underline">Hello World</p>
+    <div>
+      <Controller />
+    </div>
   )
 }
 
