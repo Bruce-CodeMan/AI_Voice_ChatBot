@@ -1,5 +1,5 @@
 import Button from "./Button";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import BetBox from "./BetBox";
 import axios from "axios";
 
@@ -8,6 +8,7 @@ function Controller() {
     const [ hasWon, setHasWon ] = useState(false);
     const [ betDirection, setBetDirection ] = useState("up");
     const [ isLoading, setIsLoading ] = useState(false);
+    const [ valStore, setValStore ] = useState(0);
 
     const containerHandler = async () => {
 
@@ -20,7 +21,7 @@ function Controller() {
                 .then((res) => {
                 if(res.status == 200){
                     const val = res.data;
-                    console.log(val)
+                    setValStore(val);
                     if(val >= 50 && betDirection == "up") {
                         isShow = true;
                     }else if(val < 50 && betDirection == "down") {
@@ -37,14 +38,17 @@ function Controller() {
         setIsLoading(false);
     }
 
-    useEffect(() => {
-        console.log(hasWon)
-    }, [hasWon])
 
     return (
-        <div className=" w-full md:w-[850px] lg:w-[1200px] bg-green-500 py-12 container mx-auto px-5">
+        <div className=" w-full md:w-[850px] lg:w-[1200px] py-12 container mx-auto px-5">
             <Button runHandler={containerHandler}/>
-            <BetBox betDirection={betDirection} setBetDirection={setBetDirection} isLoading={isLoading}/>
+            <BetBox 
+                betDirection={betDirection} 
+                setBetDirection={setBetDirection} 
+                isLoading={isLoading}
+                valStore={valStore}
+                hasWon={hasWon}
+            />
         </div>
     )
 }
