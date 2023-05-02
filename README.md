@@ -1,1 +1,3 @@
-# AI_Voice_ChatBot
+## First Draft
+
+<img src="./images/start.png">
